@@ -1,12 +1,16 @@
-import * as S from './styles';
-import StyledLink from '../StyledLink';
+import styled from 'styled-components';
+import Main from './Main';
+import Sidebar from './Sidebar';
+
+const Container = styled.div`
+  display: flex;
+`;
 
 const Note = () => (
-  <S.Wrapper>
-    <StyledLink href="/" label="Go Back Home" />
-    <h1>Note</h1>
-    <p>Note stuff will go here.</p>
-  </S.Wrapper>
+  <Container>
+    <Sidebar />
+    <Main />
+  </Container>
 );
 
 export default Note;
