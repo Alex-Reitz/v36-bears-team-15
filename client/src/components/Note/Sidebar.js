@@ -25,10 +25,13 @@ const Div = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const NoteTitle = styled.h1`
-  font-size: 1em;
-  margin: 1em;
+
+const NoteContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
+
 const IndividualNote = styled.div`
   padding: 1em;
 `;
@@ -37,27 +40,35 @@ const NotePreview = styled.p`
   margin-left: 2em;
   padding: 0.5em;
 `;
-const LastModified = styled.p`
-  font-size: 0.75em;
-  margin-left: 2em;
-  padding: 0.2em;
-`;
 
-function Sidebar() {
+//Change styling for active note
+
+function Sidebar({ notes, onAddNote, onDeleteNote, setActiveNote }) {
+  const sortedNotes = notes.sort((a, b) => b.lastModified - a.lastModified);
   return (
     <Wrapper>
       <Div>
         <Heading>Notes</Heading>
-        <ButtonAdd>Add Note</ButtonAdd>
+        <ButtonAdd onClick={onAddNote}>Add Note</ButtonAdd>
       </Div>
-      <IndividualNote>
-        <Div>
-          <NoteTitle>Title</NoteTitle>
-          <ButtonDelete>Delete</ButtonDelete>
-        </Div>
-        <NotePreview>Note preview</NotePreview>
-        <LastModified>Last modified [date]</LastModified>
-      </IndividualNote>
+      <NoteContainer>
+        {sortedNotes.map((note) => {
+          <IndividualNote onClick={() => setActiveNote(note.id)}>
+            {note.title}
+            <ButtonDelete onClick={() => onDeleteNote(note.id)}>
+              Delete
+            </ButtonDelete>
+            <NotePreview>
+              {note.body && note.body.substr(0, 100) + '...'}
+            </NotePreview>
+            Last Modified
+            {new Date(note.LastModified).toLocaleDateString('en-GB', {
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
+          </IndividualNote>;
+        })}
+      </NoteContainer>
     </Wrapper>
   );
 }

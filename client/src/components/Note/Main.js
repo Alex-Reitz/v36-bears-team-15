@@ -28,17 +28,47 @@ const NotePreviewTitle = styled.h1`
 const NotePreviewBody = styled.div`
   margin: 1m;
 `;
+const CenteredDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 300;
+`;
 
-function Main() {
+function Main({ activeNote, onUpdateNote }) {
+  const onEditField = (key, value) => {
+    onUpdateNote({
+      ...activeNote,
+      [key]: value,
+      lastModified: Date.now(),
+    });
+  };
+  if (!activeNote)
+    return (
+      <Wrapper>
+        <CenteredDiv>No active note.</CenteredDiv>
+      </Wrapper>
+    );
   return (
     <Wrapper>
       <NoteArea>
-        <InputTitle type="text" placeholder="Note Title" autoFocus />
-        <NoteInput placeholder="Write your notes here..." />
+        <InputTitle
+          type="text"
+          placeholder="Note Title"
+          autoFocus
+          value={activeNote.title}
+          onChange={(e) => onEditField('title', e.target.value)}
+        />
+        <NoteInput
+          placeholder="Write your notes here..."
+          value={activeNote.body}
+          onChange={(e) => onEditField('body', e.target.value)}
+        />
       </NoteArea>
       <NotePreview>
-        <NotePreviewTitle>Title</NotePreviewTitle>
-        <NotePreviewBody>Note</NotePreviewBody>
+        <NotePreviewTitle>{activeNote.title}</NotePreviewTitle>
+        <NotePreviewBody>{activeNote.body}</NotePreviewBody>
       </NotePreview>
     </Wrapper>
   );
