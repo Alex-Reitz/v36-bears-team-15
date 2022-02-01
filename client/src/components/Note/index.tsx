@@ -24,6 +24,7 @@ function Note() {
       body: '',
       lastModified: Date.now(),
     };
+    console.log(notes);
 
     setNotes([newNote, ...notes]);
     setActiveNote(newNote.id);

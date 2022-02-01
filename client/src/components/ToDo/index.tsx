@@ -1,12 +1,10 @@
-import * as S from './styles';
-import StyledLink from '../StyledLink';
+import TodoForm from '../TodoForm/index';
 
 const Todo = () => (
-  <S.Wrapper>
-    <StyledLink href="/" label="Go Back Home" />
-    <h1>To-Do</h1>
-    <p>To-Do stuff will go here.</p>
-  </S.Wrapper>
+  <div>
+    <h1>Todo List</h1>
+    <TodoForm />
+  </div>
 );
 
 export default Todo;

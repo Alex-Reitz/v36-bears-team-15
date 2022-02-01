@@ -10,7 +10,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>NextJS Boilerplate</title>
+        <title>Peak Productivity</title>
         <link rel="shortcut icon" href="/img/favicon.ico" />
         <link rel="apple-touch-icon" href="/img/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
