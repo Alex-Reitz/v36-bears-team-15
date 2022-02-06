@@ -24,7 +24,6 @@ function Note() {
       body: '',
       lastModified: Date.now(),
     };
-    console.log(notes);
 
     setNotes([newNote, ...notes]);
     setActiveNote(newNote.id);
@@ -39,7 +38,6 @@ function Note() {
       if (note.id === updatedNote.id) {
         return updatedNote;
       }
-
       return note;
     });
 
@@ -52,11 +50,11 @@ function Note() {
   return (
     <Container>
       <Sidebar
-        activeNote={activeNote}
-        setActiveNote={setActiveNote}
         notes={notes}
         onAddNote={onAddNote}
         onDeleteNote={onDeleteNote}
+        activeNote={activeNote}
+        setActiveNote={setActiveNote}
       />
       <Main activeNote={getActiveNote()} onUpdateNote={onUpdateNote} />
     </Container>
